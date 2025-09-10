@@ -2,6 +2,39 @@
 
 A ROS repo for capturing the data streams required of the Ego Velocity / Super Resolution project
 
+## Docker setup
+
+Build:
+
+```bash
+docker build -t voyant-egovel-container .
+```
+
+Run:
+
+```bash
+docker run -it --rm \
+    --network host \
+    --name voyant_egovel_container \
+    -v $(pwd)/workspace:/workspace/ros2_ws \
+    -v $(pwd)/debs:/debs \
+    voyant-egovel-container
+```
+
+> TEMPORARY UNTIL THIS IS HOSTED AND BUILT INTO DOCKER CONTAINER
+>
+> Requires: `debs/ros-humble-voyant-ros_0.2.1-0jammy_amd64.deb` exists in repo root
+>
+> ```bash
+> apt update && apt install -y /debs/ros-humble-voyant-ros*.deb
+> ```
+
+Exec in (access running container):
+
+```bash
+docker exec -it voyant_egovel_container bash
+```
+
 ## Manual Setup
 
 > NOTE: This is a WIP. Start dumping dependencies here.
