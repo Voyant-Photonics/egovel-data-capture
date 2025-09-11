@@ -14,7 +14,7 @@ install(DIRECTORY
   DESTINATION share/${PROJECT_NAME}/
 )
 
-# Install config files  
+# Install config files
 install(DIRECTORY
   config
   DESTINATION share/${PROJECT_NAME}/

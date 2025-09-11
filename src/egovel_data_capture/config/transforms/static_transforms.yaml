@@ -8,8 +8,8 @@ static_transforms:
     front_left:
       parent: "vehicle_cog"
       child: "wheel_fl"
-      translation: [1.2, 0.8, -0.3]  # [x_wheelbase/2, y_track/2, z_ground_clearance]
-      rotation: [0, 0, 0, 1]          # quaternion [x,y,z,w]
+      translation: [1.2, 0.8, -0.3] # [x_wheelbase/2, y_track/2, z_ground_clearance]
+      rotation: [0, 0, 0, 1] # quaternion [x,y,z,w]
     front_right:
       parent: "vehicle_cog"
       child: "wheel_fr"
@@ -30,7 +30,7 @@ static_transforms:
   collection_rig:
     parent: "vehicle_cog"
     child: "rig_baseplate"
-    translation: [0.0, 0.0, 1.5]     # Mount point on vehicle
+    translation: [0.0, 0.0, 1.5] # Mount point on vehicle
     rotation: [0, 0, 0, 1]
 
   # Sensor mounts on rig
@@ -59,4 +59,4 @@ static_transforms:
       parent: "camera_link"
       child: "camera_rgb_optical"
       translation: [0.0, 0.0, 0.0]
-      rotation: [-0.5, 0.5, -0.5, 0.5]  # 90° rotations to get from camera_link to optical frame
+      rotation: [-0.5, 0.5, -0.5, 0.5] # 90° rotations to get from camera_link to optical frame
