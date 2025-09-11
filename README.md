@@ -16,7 +16,7 @@ Run:
 docker run -it --rm \
     --network host \
     --name voyant_egovel_container \
-    -v $(pwd)/workspace:/workspace/ros2_ws \
+    -v $(pwd):/workspace/ros2_ws \
     -v $(pwd)/debs:/debs \
     voyant-egovel-container
 ```

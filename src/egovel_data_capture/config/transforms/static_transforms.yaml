@@ -1,0 +1,62 @@
+static_transforms:
+  # Vehicle base coordinate system
+  vehicle_cog:
+    frame_id: "vehicle_cog"
+
+  # Wheel transforms (for wheelbase/track encoding)
+  wheels:
+    front_left:
+      parent: "vehicle_cog"
+      child: "wheel_fl"
+      translation: [1.2, 0.8, -0.3]  # [x_wheelbase/2, y_track/2, z_ground_clearance]
+      rotation: [0, 0, 0, 1]          # quaternion [x,y,z,w]
+    front_right:
+      parent: "vehicle_cog"
+      child: "wheel_fr"
+      translation: [1.2, -0.8, -0.3]
+      rotation: [0, 0, 0, 1]
+    rear_left:
+      parent: "vehicle_cog"
+      child: "wheel_rl"
+      translation: [-1.2, 0.8, -0.3]
+      rotation: [0, 0, 0, 1]
+    rear_right:
+      parent: "vehicle_cog"
+      child: "wheel_rr"
+      translation: [-1.2, -0.8, -0.3]
+      rotation: [0, 0, 0, 1]
+
+  # Collection rig mounting
+  collection_rig:
+    parent: "vehicle_cog"
+    child: "rig_baseplate"
+    translation: [0.0, 0.0, 1.5]     # Mount point on vehicle
+    rotation: [0, 0, 0, 1]
+
+  # Sensor mounts on rig
+  sensors:
+    voyant_sensor:
+      parent: "rig_baseplate"
+      child: "voyant_sensor"
+      translation: [0.1, 0.0, 0.2]
+      rotation: [0, 0, 0, 1]
+    imu:
+      parent: "rig_baseplate"
+      child: "imu_center"
+      translation: [0.0, 0.1, 0.1]
+      rotation: [0, 0, 0, 1]
+    gps_antenna:
+      parent: "rig_baseplate"
+      child: "gps_antenna"
+      translation: [0.0, 0.0, 0.3]
+      rotation: [0, 0, 0, 1]
+    camera_link:
+      parent: "rig_baseplate"
+      child: "camera_link"
+      translation: [0.15, 0.0, 0.05]
+      rotation: [0, 0, 0, 1]
+    camera_rgb_optical:
+      parent: "camera_link"
+      child: "camera_rgb_optical"
+      translation: [0.0, 0.0, 0.0]
+      rotation: [-0.5, 0.5, -0.5, 0.5]  # 90° rotations to get from camera_link to optical frame
