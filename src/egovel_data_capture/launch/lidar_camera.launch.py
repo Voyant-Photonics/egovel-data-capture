@@ -49,6 +49,9 @@ def generate_launch_description():
         executable="camera_node",
         name="camera",
         parameters=[camera_config],
+        remappings=[
+            ("/camera/imu/data", "/imu/data")
+        ],  # TODO: Remove when we add VN-200 node
         output="screen",
     )
 

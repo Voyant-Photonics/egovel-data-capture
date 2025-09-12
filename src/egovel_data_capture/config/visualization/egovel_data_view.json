@@ -220,19 +220,19 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/camera/imu/data.linear_acceleration.x",
+          "value": "/imu/data.linear_acceleration.x",
           "enabled": true,
           "color": "#4e98e2"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/camera/imu/data.linear_acceleration.y",
+          "value": "/imu/data.linear_acceleration.y",
           "enabled": true,
           "color": "#f5774d"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/camera/imu/data.linear_acceleration.z",
+          "value": "/imu/data.linear_acceleration.z",
           "enabled": true,
           "color": "#f7df71"
         }
@@ -250,19 +250,19 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/camera/imu/data.angular_velocity.x",
+          "value": "/imu/data.angular_velocity.x",
           "enabled": true,
           "color": "#4e98e2"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/camera/imu/data.angular_velocity.y",
+          "value": "/imu/data.angular_velocity.y",
           "enabled": true,
           "color": "#f5774d"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/camera/imu/data.angular_velocity.z",
+          "value": "/imu/data.angular_velocity.z",
           "enabled": true,
           "color": "#f7df71"
         }
