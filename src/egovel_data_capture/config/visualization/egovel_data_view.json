@@ -137,16 +137,15 @@
     },
     "3D!1bzm9v": {
       "cameraState": {
+        "distance": 20,
         "perspective": true,
-        "distance": 19.9999999999962,
         "phi": 61.51762336271828,
-        "thetaOffset": 56.056324906056645,
-        "targetOffset": [
-          5.012583175623053,
-          -0.04612976546152127,
-          -8.497511248503243e-17
-        ],
         "target": [
+          0,
+          0,
+          0
+        ],
+        "targetOffset": [
           0,
           0,
           0
@@ -157,6 +156,7 @@
           0,
           1
         ],
+        "thetaOffset": 56.056324906056645,
         "fovy": 45,
         "near": 0.5,
         "far": 5000
@@ -215,6 +215,66 @@
         "poseEstimateThetaDeviation": 0.26179939
       },
       "imageMode": {}
+    },
+    "Plot!3wqxa21": {
+      "paths": [
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/camera/imu/data.linear_acceleration.x",
+          "enabled": true,
+          "color": "#4e98e2"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/camera/imu/data.linear_acceleration.y",
+          "enabled": true,
+          "color": "#f5774d"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/camera/imu/data.linear_acceleration.z",
+          "enabled": true,
+          "color": "#f7df71"
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": false,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240
+    },
+    "Plot!2xo89z3": {
+      "paths": [
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/camera/imu/data.angular_velocity.x",
+          "enabled": true,
+          "color": "#4e98e2"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/camera/imu/data.angular_velocity.y",
+          "enabled": true,
+          "color": "#f5774d"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/camera/imu/data.angular_velocity.z",
+          "enabled": true,
+          "color": "#f7df71"
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": false,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240
     }
   },
   "globalVariables": {},
@@ -232,7 +292,16 @@
       },
       "direction": "row"
     },
-    "second": "3D!1bzm9v",
+    "second": {
+      "first": "3D!1bzm9v",
+      "second": {
+        "first": "Plot!3wqxa21",
+        "second": "Plot!2xo89z3",
+        "direction": "column"
+      },
+      "direction": "row",
+      "splitPercentage": 65.54726368159204
+    },
     "direction": "column",
     "splitPercentage": 24.613987284287013
   }
