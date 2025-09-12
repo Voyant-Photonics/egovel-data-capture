@@ -111,14 +111,14 @@ source /opt/ros/humble/setup.bash
 colcon build
 ```
 
-**Terminal 1:**
+**Terminal 1:** Start the sensors
 
 ```bash
 source install/setup.bash
 ros2 launch egovel_data_capture lidar_camera.launch.py
 ```
 
-**Terminal 2:**
+**Terminal 2:** Visualize the data streams
 
 ```bash
 source install/setup.bash
@@ -130,3 +130,19 @@ Then:
 1. Open Foxglove app or web browser
 2. Connect to: `ws://localhost:8765`
 3. Load [`egovel_data_view.json`](./src/egovel_data_capture/config/visualization/egovel_data_view.json)
+
+**Terminal 3:** Log the data
+
+```bash
+ros2 launch egovel_data_capture recording.launch.py
+```
+
+This will use the `full_capture` recording profile in
+[`bag_config.yaml`](./src/egovel_data_capture/config/recording/bag_config.yaml)
+as the default.
+
+To select a different profile, specify the `RECORDING_PROFILE` environment variable:
+
+```bash
+RECORDING_PROFILE=lidar_only ros2 launch egovel_data_capture recording.launch.py
+```
