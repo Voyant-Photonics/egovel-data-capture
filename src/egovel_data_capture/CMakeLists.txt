@@ -22,7 +22,7 @@ install(DIRECTORY
 
 # Install scripts
 install(PROGRAMS
-  scripts/record_session.py
+  # scripts/placeholder.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
