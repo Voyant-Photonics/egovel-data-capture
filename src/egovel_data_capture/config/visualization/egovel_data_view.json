@@ -41,7 +41,7 @@
         "poseEstimateThetaDeviation": 0.26179939
       },
       "imageMode": {
-        "imageTopic": "/camera/rgb/image_raw",
+        "imageTopic": "/camera/rgb/image_raw/compressed",
         "calibrationTopic": "/camera/rgb/camera_info"
       }
     },
@@ -86,7 +86,7 @@
         "poseEstimateThetaDeviation": 0.26179939
       },
       "imageMode": {
-        "imageTopic": "/camera/left/image_raw",
+        "imageTopic": "/camera/left/image_raw/compressed",
         "calibrationTopic": "/camera/left/camera_info"
       }
     },
@@ -131,7 +131,7 @@
         "poseEstimateThetaDeviation": 0.26179939
       },
       "imageMode": {
-        "imageTopic": "/camera/right/image_raw",
+        "imageTopic": "/camera/right/image_raw/compressed",
         "calibrationTopic": "/camera/right/camera_info"
       }
     },
