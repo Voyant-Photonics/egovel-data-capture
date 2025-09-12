@@ -146,3 +146,39 @@ To select a different profile, specify the `RECORDING_PROFILE` environment varia
 ```bash
 RECORDING_PROFILE=lidar_only ros2 launch egovel_data_capture recording.launch.py
 ```
+
+### Playback
+
+The recording system writes sensor data to separate bag files in parallel to optimize I/O performance.
+Use `ros2 bag convert` to merge specific bags into a single file for playback when needed.
+
+**For example:**
+
+Create a file called `merge_config.yaml` with contents like:
+
+```bash
+output_bags:
+  - uri: data/bags/merged_full_capture_20250912_160110
+    storage_id: mcap
+    all: true
+```
+
+Run `ros2 bag convert` command with desired inputs:
+
+```bash
+ros2 bag convert \
+    --input data/bags/full_capture_20250912_160110/lidar_20250912_160110 \
+    --input data/bags/full_capture_20250912_160110/metadata_20250912_160110 \
+    --input data/bags/full_capture_20250912_160110/navigation_20250912_160110 \
+    --input data/bags/full_capture_20250912_160110/rgb_camera_20250912_160110 \
+    --input data/bags/full_capture_20250912_160110/stereo_cameras_20250912_160110 \
+    --output merge_config.yaml
+```
+
+Playback the merged bag file with `ros2 bag play`:
+
+```bash
+ros2 bag play data/bags/merged_full_capture_20250912_160110/
+```
+
+> You *may* also be able to play this file back directly in foxglove.
