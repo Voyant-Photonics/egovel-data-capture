@@ -96,3 +96,30 @@ sudo apt install -y ros-humble-depthai-ros # for OAK-D camera
 echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="03e7", MODE="0666"' | sudo tee /etc/udev/rules.d/80-movidius.rules
 sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
+
+## Build and run [WIP]
+
+```bash
+source /opt/ros/humble/setup.bash
+colcon build
+```
+
+**Terminal 1:**
+
+```bash
+source install/setup.bash
+ros2 launch egovel_data_capture lidar_camera.launch.py
+```
+
+**Terminal 2:**
+
+```bash
+source install/setup.bash
+ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+```
+
+Then:
+
+1. Open Foxglove app or web browser
+2. Connect to: `ws://localhost:8765`
+3. Load [`egovel_data_view.json`](./src/egovel_data_capture/config/visualization/egovel_data_view.json)
