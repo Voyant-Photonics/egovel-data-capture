@@ -16,25 +16,24 @@ def generate_launch_description():
         ]
     )
 
-    return LaunchDescription(
-        [
-            # Include static transforms
-            IncludeLaunchDescription(
-                PathJoinSubstitution(
-                    [
-                        FindPackageShare("egovel_data_capture"),
-                        "launch",
-                        "static_transforms.launch.py",
-                    ]
-                )
-            ),
-            # Sensor nodes
-            Node(
-                package="voyant-ros",
-                executable="voyant_sensor_node",
-                name="voyant_sensor",
-                parameters=[voyant_config],
-                output="screen",
-            ),
-        ]
+    # Include static transforms
+    static_transforms = IncludeLaunchDescription(
+        PathJoinSubstitution(
+            [
+                FindPackageShare("egovel_data_capture"),
+                "launch",
+                "static_transforms.launch.py",
+            ]
+        )
     )
+
+    # Sensor nodes
+    voyant_sensor = Node(
+        package="voyant-ros",
+        executable="voyant_sensor_node",
+        name="voyant_sensor",
+        parameters=[voyant_config],
+        output="screen",
+    )
+
+    return LaunchDescription([static_transforms, voyant_sensor])
