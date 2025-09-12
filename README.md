@@ -16,7 +16,7 @@ Run:
 docker run -it --rm \
     --network host \
     --name voyant_egovel_container \
-    -v $(pwd)/workspace:/workspace/ros2_ws \
+    -v $(pwd):/workspace/ros2_ws \
     -v $(pwd)/debs:/debs \
     voyant-egovel-container
 ```
@@ -77,14 +77,14 @@ Download `ros-humble-voyant-ros` package from
 [voyant-ros/releases/latest](https://github.com/Voyant-Photonics/voyant-ros/releases/latest).
 
 ```bash
-apt update
-apt install -y /workspace/debs/voyant-api*.deb
-apt install -y /workspace/debs/ros-humble-voyant-ros*.deb
+sudo apt update
+sudo apt install -y /workspace/debs/voyant-api*.deb
+sudo apt install -y /workspace/debs/ros-humble-voyant-ros*.deb
 ```
 
 ### Other ROS2 deps
 
 ```bash
-apt install -y ros-humble-foxglove-* # for visualization
-apt install -y ros-humble-depthai-ros # for OAK-D camera
+sudo apt install -y ros-humble-foxglove-* # for visualization
+sudo apt install -y ros-humble-depthai-ros # for OAK-D camera
 ```
