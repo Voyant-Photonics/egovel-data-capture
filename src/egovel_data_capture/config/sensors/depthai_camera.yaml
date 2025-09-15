@@ -4,6 +4,8 @@
       i_nn_type: none
       i_enable_ir: false
       i_pipeline_type: RGBStereo
+      i_publish_tf_from_calibration: true
+      i_tf_base_frame: "camera_link" # Must match the frame defined in static_transforms.yaml
     pipeline_gen:
       i_enable_imu: true # Set to false when we replace with VN-200
     right:
