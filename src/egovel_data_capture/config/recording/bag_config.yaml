@@ -1,0 +1,36 @@
+recording:
+  max_bag_size_mb: 500
+  base_path: "data/bags"
+
+  profiles:
+    full_capture:
+      topics:
+        - topic: "/point_cloud"
+          bag_name: "lidar"
+        - topic: "/tf_static"
+          bag_name: "metadata"
+        - topic: "/camera/rgb/image_raw/compressed"
+          bag_name: "rgb_camera"
+        - topic: "/camera/rgb/camera_info"
+          bag_name: "rgb_camera"
+        - topic: "/camera/left/image_raw/compressed"
+          bag_name: "stereo_cameras"
+        - topic: "/camera/right/image_raw/compressed"
+          bag_name: "stereo_cameras"
+        - topic: "/camera/left/camera_info"
+          bag_name: "stereo_cameras"
+        - topic: "/camera/right/camera_info"
+          bag_name: "stereo_cameras"
+        - topic: "/imu/data"
+          bag_name: "navigation"
+        - topic: "/gps/fix"
+          bag_name: "navigation"
+        - topic: "/gps/navpvt"
+          bag_name: "navigation"
+
+    lidar_only:
+      topics:
+        - topic: "/point_cloud"
+          bag_name: "lidar"
+        - topic: "/tf_static"
+          bag_name: "metadata"
