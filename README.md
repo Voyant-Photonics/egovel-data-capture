@@ -134,6 +134,7 @@ Then:
 **Terminal 3:** Log the data
 
 ```bash
+source install/setup.bash
 ros2 launch egovel_data_capture recording.launch.py
 ```
 
