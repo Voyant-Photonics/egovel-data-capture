@@ -34,7 +34,8 @@ def generate_launch_description():
         name="voyant_sensor",
         parameters=[voyant_config],
         remappings=[
-            ("/point_cloud", "/voyant/point_cloud")
+            ("/device_metadata", "/voyant/device_metadata"),
+            ("/point_cloud", "/voyant/point_cloud"),
         ],  # TODO: Remove when this is inherent to ROS node
         output="screen",
     )
