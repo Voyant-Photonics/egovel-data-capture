@@ -37,7 +37,7 @@ def generate_launch_description():
 
     # Sensor nodes
     voyant_sensor = Node(
-        package="voyant-ros",
+        package="voyant_ros",
         executable="voyant_sensor_node",
         name="voyant_sensor",
         parameters=[voyant_config],
