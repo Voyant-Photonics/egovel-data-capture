@@ -5,7 +5,9 @@ recording:
   profiles:
     full_capture:
       topics:
-        - topic: "/point_cloud"
+        - topic: "/voyant/device_metadata"
+          bag_name: "lidar"
+        - topic: "/voyant/point_cloud"
           bag_name: "lidar"
         - topic: "/tf_static"
           bag_name: "metadata"
@@ -30,7 +32,9 @@ recording:
 
     lidar_only:
       topics:
-        - topic: "/point_cloud"
+        - topic: "/voyant/device_metadata"
+          bag_name: "lidar"
+        - topic: "/voyant/point_cloud"
           bag_name: "lidar"
         - topic: "/tf_static"
           bag_name: "metadata"

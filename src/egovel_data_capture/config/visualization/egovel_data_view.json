@@ -165,7 +165,7 @@
       "scene": {},
       "transforms": {},
       "topics": {
-        "/point_cloud": {
+        "/voyant/point_cloud": {
           "visible": true,
           "colorField": "_auto_distance",
           "colorMode": "colormap",
