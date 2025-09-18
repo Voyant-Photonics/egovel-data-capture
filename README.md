@@ -67,9 +67,9 @@ sudo apt install -y debs/ros-humble-voyant-ros*.deb
 
 ```bash
 sudo apt install -y ros-humble-foxglove-bridge  # for visualization
-sudo apt install -y ros-humble-foxglove-msgs    # for visualization
-sudo apt install -y ros-humble-depthai-ros      # for OAK-D camera
-sudo apt install -y ros-humble-rtcm_msgs        # for GPS
+sudo apt install -y ros-humble-foxglove-msgs   # for visualization
+sudo apt install -y ros-humble-depthai-ros     # for OAK-D camera
+sudo apt install -y ros-humble-rtcm_msgs       # for GPS
 ```
 
 #### Other deps
@@ -134,7 +134,7 @@ source install/setup.bash
 ros2 launch egovel_data_capture gps.launch.py
 ```
 
-The GPS sensor and NTRIP client can be configured in [`src/egovel_data_capture/config/sensors/gps.yaml`](./src/egovel_data_capture/config/sensors/gps.yaml).
+The GPS sensor and NTRIP client can be configured in [`gps.yaml`](./src/egovel_data_capture/config/sensors/gps.yaml).
 
 **Terminal 3:** Visualize the data streams
 
