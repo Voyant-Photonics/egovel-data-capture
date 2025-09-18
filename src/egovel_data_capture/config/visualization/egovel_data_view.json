@@ -137,15 +137,16 @@
     },
     "3D!1bzm9v": {
       "cameraState": {
-        "distance": 20,
         "perspective": true,
-        "phi": 61.51762336271828,
-        "target": [
-          0,
-          0,
-          0
-        ],
+        "distance": 19.999999999999794,
+        "phi": 61.5176233627186,
+        "thetaOffset": 56.05632490605705,
         "targetOffset": [
+          2.3062215938403967,
+          1.1386475563075302,
+          1.197293201099355e-16
+        ],
+        "target": [
           0,
           0,
           0
@@ -156,7 +157,6 @@
           0,
           1
         ],
-        "thetaOffset": 56.056324906056645,
         "fovy": 45,
         "near": 0.5,
         "far": 5000
@@ -216,25 +216,51 @@
       },
       "imageMode": {}
     },
-    "Plot!3wqxa21": {
+    "map!3jy8v8o": {
+      "center": {
+        "lat": 40.7532725,
+        "lon": -73.9914892
+      },
+      "customTileUrl": "",
+      "disabledTopics": [],
+      "followTopic": "/ublox_gps_node/fix",
+      "layer": "map",
+      "topicColors": {},
+      "zoomLevel": 19,
+      "maxNativeZoom": 18,
+      "topicConfig": {
+        "/fix": {
+          "historyMode": "all",
+          "pointDisplayMode": "pin"
+        },
+        "/ublox_gps_node/fix": {
+          "historyMode": "all",
+          "pointDisplayMode": "pin"
+        }
+      }
+    },
+    "Plot!2xo89z3": {
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/imu/data.linear_acceleration.x",
+          "value": "/imu/data.angular_velocity.y",
           "enabled": true,
-          "color": "#4e98e2"
+          "color": "#f5774d",
+          "label": "Pitch Rate"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/imu/data.linear_acceleration.y",
+          "value": "/imu/data.angular_velocity.z",
           "enabled": true,
-          "color": "#f5774d"
+          "color": "#f7df71",
+          "label": "Yaw Rate"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/imu/data.linear_acceleration.z",
+          "value": "/imu/data.angular_velocity.x",
           "enabled": true,
-          "color": "#f7df71"
+          "color": "#4e98e2",
+          "label": "Roll Rate"
         }
       ],
       "showXAxisLabels": true,
@@ -246,25 +272,28 @@
       "xAxisVal": "timestamp",
       "sidebarDimension": 240
     },
-    "Plot!2xo89z3": {
+    "Plot!3wqxa21": {
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/imu/data.angular_velocity.x",
+          "value": "/imu/data.linear_acceleration.x",
           "enabled": true,
-          "color": "#4e98e2"
+          "color": "#4e98e2",
+          "label": "Lin Accel X"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/imu/data.angular_velocity.y",
+          "value": "/imu/data.linear_acceleration.y",
           "enabled": true,
-          "color": "#f5774d"
+          "color": "#f5774d",
+          "label": "Lin Accel Y"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/imu/data.angular_velocity.z",
+          "value": "/imu/data.linear_acceleration.z",
           "enabled": true,
-          "color": "#f7df71"
+          "color": "#f7df71",
+          "label": "Lin Accel Z"
         }
       ],
       "showXAxisLabels": true,
@@ -290,17 +319,23 @@
         "second": "Image!2oykwtt",
         "direction": "row"
       },
-      "direction": "row"
+      "direction": "row",
+      "splitPercentage": 35.85313174946004
     },
     "second": {
-      "first": "3D!1bzm9v",
-      "second": {
-        "first": "Plot!3wqxa21",
-        "second": "Plot!2xo89z3",
-        "direction": "column"
+      "first": {
+        "first": "3D!1bzm9v",
+        "second": "map!3jy8v8o",
+        "direction": "row",
+        "splitPercentage": 67.92656587473002
       },
-      "direction": "row",
-      "splitPercentage": 65.54726368159204
+      "second": {
+        "first": "Plot!2xo89z3",
+        "second": "Plot!3wqxa21",
+        "direction": "row"
+      },
+      "direction": "column",
+      "splitPercentage": 68.22335212409271
     },
     "direction": "column",
     "splitPercentage": 24.613987284287013

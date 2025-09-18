@@ -122,19 +122,16 @@ ros2 launch egovel_data_capture lidar_camera.launch.py
 
 ```bash
 source install/setup.bash
-ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+ros2 launch egovel_data_capture foxglove.launch.py open_in:=web # or open_in:=desktop default is desktop
 ```
 
 Then:
-
-1. Open Foxglove app or web browser
-2. Connect to: `ws://localhost:8765`
-3. Load [`egovel_data_view.json`](./src/egovel_data_capture/config/visualization/egovel_data_view.json)
+1. Load [`egovel_data_view.json`](./src/egovel_data_capture/config/visualization/egovel_data_view.json)
 
 **Terminal 3:** Log the data
 
 ```bash
-source install/setup.bash
+source install/setup.bashx
 ros2 launch egovel_data_capture recording.launch.py
 ```
 
