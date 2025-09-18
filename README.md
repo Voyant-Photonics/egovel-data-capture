@@ -69,6 +69,15 @@ sudo apt install -y debs/ros-humble-voyant-ros*.deb
 sudo apt install -y ros-humble-foxglove-bridge  # for visualization
 sudo apt install -y ros-humble-foxglove-msgs    # for visualization
 sudo apt install -y ros-humble-depthai-ros      # for OAK-D camera
+sudo apt install -y ros-humble-rtcm_msgs        # for GPS
+```
+
+#### Other deps
+
+Install `asio`; required for `ublox` node.
+
+```bash
+sudo apt install -y libasio-dev
 ```
 
 ### Docker setup
@@ -118,20 +127,28 @@ source install/setup.bash
 ros2 launch egovel_data_capture lidar_camera.launch.py
 ```
 
-**Terminal 2:** Visualize the data streams
+**Terminal 2:** Start the GPS node
+
+```bash
+source install/setup.bash
+ros2 launch egovel_data_capture gps.launch.py
+```
+
+The GPS sensor and NTRIP client can be configured in [`src/egovel_data_capture/config/sensors/gps.yaml`](./src/egovel_data_capture/config/sensors/gps.yaml).
+
+**Terminal 3:** Visualize the data streams
 
 ```bash
 source install/setup.bash
 ros2 launch egovel_data_capture foxglove.launch.py open_in:=web # or open_in:=desktop default is desktop
 ```
 
-Then:
-1. Load [`egovel_data_view.json`](./src/egovel_data_capture/config/visualization/egovel_data_view.json)
+Then load [`egovel_data_view.json`](./src/egovel_data_capture/config/visualization/egovel_data_view.json)
 
-**Terminal 3:** Log the data
+**Terminal 4:** Log the data
 
 ```bash
-source install/setup.bashx
+source install/setup.bash
 ros2 launch egovel_data_capture recording.launch.py
 ```
 
