@@ -1,0 +1,28 @@
+/camera:
+  camera:
+    ros__parameters:
+      # Device settings
+      serial_no: "" # Empty for first available device
+
+      # Enable/disable streams
+      enable_color: true
+      enable_depth: false
+      enable_infra1: true # Left IR camera
+      enable_infra2: true # Right IR camera
+      enable_accel: false
+      enable_gyro: false
+
+      # Depth processing
+      align_depth.enable: false
+
+      # Exposure settings
+      depth_module.enable_auto_exposure: true
+      rgb_camera.enable_auto_exposure: true
+
+      # Frame publishing
+      publish_tf: true
+      tf_publish_rate: 0.0 # 0.0 means publish once at startup
+
+      # Transform naming
+      camera_name: "camera"
+      base_frame_id: "link"

@@ -133,6 +133,12 @@ source install/setup.bash
 ros2 launch egovel_data_capture lidar_camera.launch.py
 ```
 
+By default, this uses the `oakd` camera. You can switch to `realsense` with:
+
+```bash
+ros2 launch egovel_data_capture lidar_camera.launch.py camera_type:=realsense
+```
+
 **Terminal 2:** Visualize the data streams
 
 ```bash
