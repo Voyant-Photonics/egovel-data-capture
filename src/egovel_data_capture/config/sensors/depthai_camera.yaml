@@ -7,7 +7,7 @@
       i_publish_tf_from_calibration: true
       i_tf_base_frame: "camera_link" # Must match the frame defined in static_transforms.yaml
     pipeline_gen:
-      i_enable_imu: true # Set to false when we replace with VN-200
+      i_enable_imu: false
     right:
       i_publish_topic: true
     left:
