@@ -132,7 +132,7 @@ docker exec -it voyant_egovel_container bash
 
 ```bash
 source /opt/ros/humble/setup.bash
-colcon build
+colcon build # Optionally, use --parallel-workers $(nproc) to speed up build
 ```
 
 **Terminal 1:** Start the sensors
