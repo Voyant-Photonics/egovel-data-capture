@@ -4,6 +4,20 @@ A ROS repo for capturing the data streams required of the Ego Velocity / Super R
 
 ## Setup
 
+### Clone the repo
+
+```bash
+# Clone the repo with submodules
+git clone --recurse-submodules https://github.com/Voyant-Photonics/egovel-data-capture.git
+```
+
+If ever new submodules are added or existing submodules are updated, run:
+
+```bash
+# Update submodules
+git submodule update --init --recursive
+```
+
 ### Depthai UDEV rules
 
 These are required to connect to Luxonis OAK cameras over USB.
@@ -59,8 +73,8 @@ and place it in a `debs/` dir in your relative path.
 
 ```bash
 sudo apt update
-sudo apt install -y debs/voyant-api*.deb
-sudo apt install -y debs/ros-humble-voyant-ros*.deb
+sudo apt install -y ./debs/voyant-api*.deb
+sudo apt install -y ./debs/ros-humble-voyant-ros*.deb
 ```
 
 #### Other ROS2 deps
@@ -69,7 +83,8 @@ sudo apt install -y debs/ros-humble-voyant-ros*.deb
 sudo apt install -y ros-humble-foxglove-bridge  # for visualization
 sudo apt install -y ros-humble-foxglove-msgs   # for visualization
 sudo apt install -y ros-humble-depthai-ros     # for OAK-D camera
-sudo apt install -y ros-humble-rtcm_msgs       # for GPS
+sudo apt install -y ros-humble-rtcm-msgs       # for GPS
+sudo apt install -y ros-humble-nmea-msgs       # for GPS
 ```
 
 #### Other deps
