@@ -3,7 +3,7 @@ import yaml
 
 import ament_index_python
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
@@ -12,8 +12,6 @@ from launch_ros.actions import SetRemap
 
 def generate_launch_description():
     # Get the path to the ublox_gps package and ntrip_client package
-    ublox_gps_pkg = ament_index_python.get_package_share_directory(
-        'ublox_gps')
     ntrip_client_pkg = ament_index_python.get_package_share_directory(
         'ntrip_client')
 
@@ -64,14 +62,14 @@ def generate_launch_description():
             'password': ntrip_configs['password'],
         }.items(),
     )
-    remap_gps = SetRemap(
-        src='nmea',
-        dst='/ublox_gps_node/fix'
-    )
+    # Remap the topics expected by ntrip_client to the ublox node outputs
+    ntrip_with_remaps = GroupAction([
+        SetRemap(src='fix', dst='/ublox_gps_node/fix'),
+        ntrip_launch,
+    ])
 
     return LaunchDescription([
         config_file_arg,
         ublox_launch,
-        ntrip_launch,
-        remap_gps,
+        ntrip_with_remaps,
     ])
