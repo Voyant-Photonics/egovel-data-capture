@@ -9,8 +9,8 @@ from launch.substitutions import LaunchConfiguration, PythonExpression
 def generate_launch_description():
     # Launch arg to control where to open Foxglove: 'desktop' or 'web'
     open_in_arg = DeclareLaunchArgument(
-        'open_in',
-        default_value='desktop',
+        "open_in",
+        default_value="desktop",
         description="Where to open Foxglove: 'desktop' (foxglove-studio app) or 'web' (browser)",
     )
 
@@ -34,7 +34,9 @@ def generate_launch_description():
     # Deep link base that connects to local foxglove-websocket (from foxglove_bridge)
     # Note: ds.url is intentionally not URL-encoded; Foxglove handles this form too.
     deep_link_base = "https://app.foxglove.dev/~/view?ds=foxglove-websocket&ds.url=ws://localhost:8765"
-    app_deep_link_base = "foxglove://open?ds=foxglove-websocket&ds.url=ws://localhost:8765"
+    app_deep_link_base = (
+        "foxglove://open?ds=foxglove-websocket&ds.url=ws://localhost:8765"
+    )
 
     # Open in Foxglove desktop app
     foxglove_desktop = ExecuteProcess(
@@ -42,8 +44,9 @@ def generate_launch_description():
             "foxglove-studio",
             PythonExpression([f"'{app_deep_link_base}'"]),
         ],
-        condition=IfCondition(PythonExpression(
-            ["'", LaunchConfiguration('open_in'), "' == 'desktop'"])),
+        condition=IfCondition(
+            PythonExpression(["'", LaunchConfiguration("open_in"), "' == 'desktop'"])
+        ),
     )
 
     # Open in default web browser
@@ -52,13 +55,16 @@ def generate_launch_description():
             "xdg-open",
             PythonExpression([f"'{deep_link_base}'"]),
         ],
-        condition=IfCondition(PythonExpression(
-            ["'", LaunchConfiguration('open_in'), "' == 'web'"])),
+        condition=IfCondition(
+            PythonExpression(["'", LaunchConfiguration("open_in"), "' == 'web'"])
+        ),
     )
 
-    return LaunchDescription([
-        open_in_arg,
-        foxglove_bridge,
-        foxglove_desktop,
-        foxglove_web,
-    ])
+    return LaunchDescription(
+        [
+            open_in_arg,
+            foxglove_bridge,
+            foxglove_desktop,
+            foxglove_web,
+        ]
+    )
