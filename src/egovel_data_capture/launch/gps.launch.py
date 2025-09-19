@@ -31,7 +31,7 @@ def generate_launch_description():
         description="Path to the ublox_gps_node config file",
     )
 
-    # Include the ublox_gps_node launch file with the config file argument
+    # Include the ublox_gps_node launch file with the config file argument and remaps
     params = config["ublox_gps_node"]["ros__parameters"]
     ublox_launch = ComposableNodeContainer(
         name="ublox_gps_container",
@@ -44,11 +44,23 @@ def generate_launch_description():
                 plugin="ublox_node::UbloxNode",
                 name="ublox_gps_node",
                 parameters=[params],
+                # Remap all ublox topics to /ublox_gps_node/ namespace
+                remappings=[
+                    ("navstatus", "/ublox_gps_node/navstatus"),
+                    ("navrelposned", "/ublox_gps_node/navrelposned"),
+                    ("fix", "/ublox_gps_node/fix"),
+                    ("fix_velocity", "/ublox_gps_node/fix_velocity"),
+                    ("navcov", "/ublox_gps_node/navcov"),
+                    ("navpvt", "/ublox_gps_node/navpvt"),
+                    ("nmea", "/ublox_gps_node/nmea"),
+                    ("rtcm", "/ublox_gps_node/rtcm"),
+                ],
             ),
         ],
         output="both",
     )
-    # Launch the ntrip client node with the appropriate arguments
+
+    # Launch the ntrip client node with the appropriate arguments and remaps
     ntrip_configs = config["ntrip_client_config"]["ros__parameters"]
     ntrip_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -62,10 +74,14 @@ def generate_launch_description():
             "password": ntrip_configs["password"],
         }.items(),
     )
-    # Remap the topics expected by ntrip_client to the ublox node outputs
+
+    # Remap the ntrip client topics to match the new GPS namespace
     ntrip_with_remaps = GroupAction(
         [
+            # NTRIP client subscribes to fix & nmea and publishes rtcm
             SetRemap(src="fix", dst="/ublox_gps_node/fix"),
+            SetRemap(src="nmea", dst="/ublox_gps_node/nmea"),
+            SetRemap(src="rtcm", dst="/ublox_gps_node/rtcm"),
             ntrip_launch,
         ]
     )
