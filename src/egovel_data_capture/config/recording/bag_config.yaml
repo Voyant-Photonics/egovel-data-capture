@@ -3,7 +3,7 @@ recording:
   base_path: "data/bags"
 
   profiles:
-    # All streams, with OAK-D camera
+    # All streams
     full_capture:
       topics:
         # LiDAR topics
@@ -27,39 +27,6 @@ recording:
         - topic: "/camera/left/camera_info"
           bag_name: "stereo_cameras"
         - topic: "/camera/right/camera_info"
-          bag_name: "stereo_cameras"
-        # Navigation topics
-        - topic: "/imu/data"
-          bag_name: "navigation"
-        - topic: "/gps/fix"
-          bag_name: "navigation"
-        - topic: "/gps/navpvt"
-          bag_name: "navigation"
-
-    # All streams, with Realsense camera
-    full_capture_realsense:
-      topics:
-        # LiDAR topics
-        - topic: "/voyant/device_metadata"
-          bag_name: "lidar"
-        - topic: "/voyant/point_cloud"
-          bag_name: "lidar"
-        # Metadata topics
-        - topic: "/tf_static"
-          bag_name: "metadata"
-        # RGB camera (RealSense color camera)
-        - topic: "/camera/camera/color/image_raw/compressed"
-          bag_name: "rgb_camera"
-        - topic: "/camera/camera/color/camera_info"
-          bag_name: "rgb_camera"
-        # Stereo cameras (RealSense infrared cameras)
-        - topic: "/camera/camera/infra1/image_rect_raw/compressed"
-          bag_name: "stereo_cameras"
-        - topic: "/camera/camera/infra2/image_rect_raw/compressed"
-          bag_name: "stereo_cameras"
-        - topic: "/camera/camera/infra1/camera_info"
-          bag_name: "stereo_cameras"
-        - topic: "/camera/camera/infra2/camera_info"
           bag_name: "stereo_cameras"
         # Navigation topics
         - topic: "/imu/data"

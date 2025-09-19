@@ -50,7 +50,7 @@ def generate_launch_description():
         condition=IfCondition(EqualsSubstitution(camera_type, "oakd")),
     )
 
-    # RealSense camera node (conditional)
+    # RealSense camera node (conditional) with topics remapped to match OAK-D
     realsense_camera_node = Node(
         package="realsense2_camera",
         executable="realsense2_camera_node",
@@ -58,6 +58,25 @@ def generate_launch_description():
         parameters=[realsense_config],
         output="screen",
         condition=IfCondition(EqualsSubstitution(camera_type, "realsense")),
+        remappings=[
+            # RGB camera remapping (RealSense color -> standard RGB)
+            (
+                "/camera/camera/color/image_raw/compressed",
+                "/camera/rgb/image_raw/compressed",
+            ),
+            ("/camera/camera/color/camera_info", "/camera/rgb/camera_info"),
+            # Stereo cameras remapping (RealSense infrared -> standard left/right)
+            (
+                "/camera/camera/infra1/image_rect_raw/compressed",
+                "/camera/left/image_raw/compressed",
+            ),
+            (
+                "/camera/camera/infra2/image_rect_raw/compressed",
+                "/camera/right/image_raw/compressed",
+            ),
+            ("/camera/camera/infra1/camera_info", "/camera/left/camera_info"),
+            ("/camera/camera/infra2/camera_info", "/camera/right/camera_info"),
+        ],
     )
 
     return LaunchDescription(
