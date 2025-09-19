@@ -12,6 +12,9 @@
       enable_accel: false
       enable_gyro: false
 
+      # Turn off IR emitter/projector
+      depth_module.emitter_enabled: false
+
       # Depth processing
       align_depth.enable: false
 
