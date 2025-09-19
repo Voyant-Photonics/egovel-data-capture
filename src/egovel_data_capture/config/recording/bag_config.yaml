@@ -70,22 +70,3 @@ recording:
           bag_name: "lidar"
         - topic: "/tf_static"
           bag_name: "metadata"
-
-    gps_only:
-      topics:
-        - topic: "/gps/fix"
-          bag_name: "navigation"
-        - topic: "/gps/navcov"
-          bag_name: "navigation"
-        - topic: "/gps/navpvt"
-          bag_name: "navigation"
-        - topic: "/gps/navstatus"
-          bag_name: "navigation"
-        - topic: "/gps/navrelposned"
-          bag_name: "navigation"
-        - topic: "/gps/fix_velocity"
-          bag_name: "navigation"
-        - topic: "/gps/nmea"
-          bag_name: "navigation"
-        - topic: "/gps/rtcm"
-          bag_name: "navigation"
