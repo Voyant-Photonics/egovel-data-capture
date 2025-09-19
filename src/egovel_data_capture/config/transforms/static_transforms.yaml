@@ -42,7 +42,7 @@ static_transforms:
       rotation: [0, 0, 0, 1]
     imu:
       parent: "rig_baseplate"
-      child: "imu_center"
+      child: "imu"
       translation: [0.0, 0.1, 0.1]
       rotation: [0, 0, 0, 1]
     gps_antenna:

@@ -28,12 +28,24 @@ recording:
           bag_name: "stereo_cameras"
         - topic: "/camera/right/camera_info"
           bag_name: "stereo_cameras"
-        # Navigation topics
-        - topic: "/imu/data"
-          bag_name: "navigation"
+        # Navigation topics (GPS + IMU)
         - topic: "/gps/fix"
           bag_name: "navigation"
         - topic: "/gps/navpvt"
+          bag_name: "navigation"
+        - topic: "/vectornav/gnss"
+          bag_name: "navigation"
+        - topic: "/vectornav/imu"
+          bag_name: "navigation"
+        - topic: "/vectornav/imu_uncompensated"
+          bag_name: "navigation"
+        - topic: "/vectornav/pose"
+          bag_name: "navigation"
+        - topic: "/vectornav/raw/ins"
+          bag_name: "navigation"
+        - topic: "/vectornav/time_gps"
+          bag_name: "navigation"
+        - topic: "/vectornav/velocity_body"
           bag_name: "navigation"
 
     lidar_only:
