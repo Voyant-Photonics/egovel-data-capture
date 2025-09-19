@@ -1,0 +1,8 @@
+[submodule "src/ublox"]
+	path = src/ublox
+	url = https://github.com/Voyant-Photonics/ublox.git
+	branch = ros2
+[submodule "src/ntrip_client"]
+	path = src/ntrip_client
+	url = https://github.com/Voyant-Photonics/ntrip_client.git
+	branch = ros2

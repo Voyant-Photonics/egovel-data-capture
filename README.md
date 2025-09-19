@@ -4,6 +4,20 @@ A ROS repo for capturing the data streams required of the Ego Velocity / Super R
 
 ## Setup
 
+### Clone the repo
+
+```bash
+# Clone the repo with submodules
+git clone --recurse-submodules https://github.com/Voyant-Photonics/egovel-data-capture.git
+```
+
+If ever new submodules are added or existing submodules are updated, run:
+
+```bash
+# Update submodules
+git submodule update --init --recursive
+```
+
 ### Depthai UDEV rules
 
 These are required to connect to Luxonis OAK cameras over USB.
@@ -59,8 +73,8 @@ and place it in a `debs/` dir in your relative path.
 
 ```bash
 sudo apt update
-sudo apt install -y debs/voyant-api*.deb
-sudo apt install -y debs/ros-humble-voyant-ros*.deb
+sudo apt install -y ./debs/voyant-api*.deb
+sudo apt install -y ./debs/ros-humble-voyant-ros*.deb
 ```
 
 #### Intel realsense-ros
@@ -82,8 +96,18 @@ https://github.com/IntelRealSense/realsense-ros
 
 ```bash
 sudo apt install -y ros-humble-foxglove-bridge  # for visualization
-sudo apt install -y ros-humble-foxglove-msgs    # for visualization
-sudo apt install -y ros-humble-depthai-ros      # for OAK-D camera
+sudo apt install -y ros-humble-foxglove-msgs   # for visualization
+sudo apt install -y ros-humble-depthai-ros     # for OAK-D camera
+sudo apt install -y ros-humble-rtcm-msgs       # for GPS
+sudo apt install -y ros-humble-nmea-msgs       # for GPS
+```
+
+#### Other deps
+
+Install `asio`; required for `ublox` node.
+
+```bash
+sudo apt install -y libasio-dev
 ```
 
 ### Docker setup
@@ -123,7 +147,7 @@ docker exec -it voyant_egovel_container bash
 
 ```bash
 source /opt/ros/humble/setup.bash
-colcon build
+colcon build # Optionally, use --parallel-workers $(nproc) to speed up build
 ```
 
 **Terminal 1:** Start the sensors
@@ -139,18 +163,23 @@ By default, this uses the `oakd` camera. You can switch to `realsense` with:
 ros2 launch egovel_data_capture lidar_camera.launch.py camera_type:=realsense
 ```
 
+Start the GPS Node. The RTK corrections are provided through a NTRIP connection with [`NYSNET`](https://cors.dot.ny.gov/sbc/Account/Index?returnUrl=%2Fsbc) VRS on `/rtcm` topic.
+
+```bash
+source install/setup.bash
+ros2 launch egovel_data_capture gps.launch.py
+```
+
+The GPS sensor and NTRIP client can be configured in [`gps.yaml`](./src/egovel_data_capture/config/sensors/gps.yaml).
+
 **Terminal 2:** Visualize the data streams
 
 ```bash
 source install/setup.bash
-ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+ros2 launch egovel_data_capture foxglove.launch.py open_in:=web # or open_in:=desktop default is desktop
 ```
 
-Then:
-
-1. Open Foxglove app or web browser
-2. Connect to: `ws://localhost:8765`
-3. Load [`egovel_data_view.json`](./src/egovel_data_capture/config/visualization/egovel_data_view.json)
+Then load [`egovel_data_view.json`](./src/egovel_data_capture/config/visualization/egovel_data_view.json)
 
 **Terminal 3:** Log the data
 
