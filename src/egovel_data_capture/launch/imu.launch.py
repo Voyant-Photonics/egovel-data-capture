@@ -1,6 +1,6 @@
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
 from launch.substitutions import PathJoinSubstitution
+from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
@@ -15,18 +15,24 @@ def generate_launch_description():
         ]
     )
 
-    # Include vectornav launch file
-    vectornav_launch = IncludeLaunchDescription(
-        PathJoinSubstitution(
-            [
-                FindPackageShare("vectornav"),
-                "launch",
-                "vectornav.launch.py",
-            ]
-        ),
-        launch_arguments={
-            "config_file": vectornav_config,
-        }.items(),
+    # Vectornav nodes
+    start_vectornav_cmd = Node(
+        package="vectornav",
+        executable="vectornav",
+        output="screen",
+        parameters=[vectornav_config],
     )
 
-    return LaunchDescription([vectornav_launch])
+    start_vectornav_sensor_msgs_cmd = Node(
+        package="vectornav",
+        executable="vn_sensor_msgs",
+        output="screen",
+        parameters=[vectornav_config],
+    )
+
+    return LaunchDescription(
+        [
+            start_vectornav_cmd,
+            start_vectornav_sensor_msgs_cmd,
+        ]
+    )
