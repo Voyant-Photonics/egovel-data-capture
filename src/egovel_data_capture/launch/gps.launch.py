@@ -42,16 +42,16 @@ def generate_launch_description():
             ComposableNode(
                 package="ublox_gps",
                 plugin="ublox_node::UbloxNode",
-                name="gps",
+                name="ublox_gps_node",
                 parameters=[params],
                 # Remap all ublox topics to /gps/ namespace
                 remappings=[
+                    ("/ublox_gps_node/fix", "/gps/fix"),
+                    ("/ublox_gps_node/fix_velocity", "/gps/fix_velocity"),
+                    ("/ublox_gps_node/navpvt", "/gps/navpvt"),
                     ("navstatus", "/gps/navstatus"),
                     ("navrelposned", "/gps/navrelposned"),
-                    ("fix", "/gps/fix"),
-                    ("fix_velocity", "/gps/fix_velocity"),
                     ("navcov", "/gps/navcov"),
-                    ("navpvt", "/gps/navpvt"),
                     ("nmea", "/gps/nmea"),
                     ("rtcm", "/gps/rtcm"),
                 ],
