@@ -77,6 +77,21 @@ sudo apt install -y ./debs/voyant-api*.deb
 sudo apt install -y ./debs/ros-humble-voyant-ros*.deb
 ```
 
+#### Intel realsense-ros
+
+> ⚠️ If you are only using a Luxonis OAK-D camera, then you can skip this section!
+
+Follow the latest `realsense-ros` installation instructions for ROS2 found at:
+https://github.com/IntelRealSense/realsense-ros
+
+> At the time of writing this involves a few steps,
+> including installing their native drivers before installing the ros packages.
+>
+> They provide a few different options, but it is recommended to use the simplest (typically Option 1 for each step).
+> There is probably no reason to install from source.
+>
+> If you try to go direct with `sudo apt install ros-humble-realsense2-*`, you may experience some issues.
+
 #### Other ROS2 deps
 
 ```bash
@@ -142,7 +157,13 @@ source install/setup.bash
 ros2 launch egovel_data_capture lidar_camera.launch.py
 ```
 
-**Terminal 2:** Start the GPS node
+By default, this uses the `oakd` camera. You can switch to `realsense` with:
+
+```bash
+ros2 launch egovel_data_capture lidar_camera.launch.py camera_type:=realsense
+```
+
+Start the GPS Node. The RTK corrections are provided through a NTRIP connection with [`NYSNET`](https://cors.dot.ny.gov/sbc/Account/Index?returnUrl=%2Fsbc) VRS on `/rtcm` topic.
 
 ```bash
 source install/setup.bash
@@ -151,7 +172,7 @@ ros2 launch egovel_data_capture gps.launch.py
 
 The GPS sensor and NTRIP client can be configured in [`gps.yaml`](./src/egovel_data_capture/config/sensors/gps.yaml).
 
-**Terminal 3:** Visualize the data streams
+**Terminal 2:** Visualize the data streams
 
 ```bash
 source install/setup.bash
@@ -160,7 +181,7 @@ ros2 launch egovel_data_capture foxglove.launch.py open_in:=web # or open_in:=de
 
 Then load [`egovel_data_view.json`](./src/egovel_data_capture/config/visualization/egovel_data_view.json)
 
-**Terminal 4:** Log the data
+**Terminal 3:** Log the data
 
 ```bash
 source install/setup.bash
