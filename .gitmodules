@@ -6,3 +6,6 @@
 	path = src/ntrip_client
 	url = https://github.com/Voyant-Photonics/ntrip_client.git
 	branch = ros2
+[submodule "src/vectornav"]
+	path = src/vectornav
+	url = https://github.com/Voyant-Photonics/vectornav.git
