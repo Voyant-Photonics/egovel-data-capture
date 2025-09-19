@@ -63,6 +63,21 @@ sudo apt install -y debs/voyant-api*.deb
 sudo apt install -y debs/ros-humble-voyant-ros*.deb
 ```
 
+#### Intel realsense-ros
+
+> ⚠️ If you are only using a Luxonis OAK-D camera, then you can skip this section!
+
+Follow the latest `realsense-ros` installation instructions for ROS2 found at:
+https://github.com/IntelRealSense/realsense-ros
+
+> At the time of writing this involves a few steps,
+> including installing their native drivers before installing the ros packages.
+>
+> They provide a few different options, but it is recommended to use the simplest (typically Option 1 for each step).
+> There is probably no reason to install from source.
+>
+> If you try to go direct with `sudo apt install ros-humble-realsense2-*`, you may experience some issues.
+
 #### Other ROS2 deps
 
 ```bash
@@ -116,6 +131,12 @@ colcon build
 ```bash
 source install/setup.bash
 ros2 launch egovel_data_capture lidar_camera.launch.py
+```
+
+By default, this uses the `oakd` camera. You can switch to `realsense` with:
+
+```bash
+ros2 launch egovel_data_capture lidar_camera.launch.py camera_type:=realsense
 ```
 
 **Terminal 2:** Visualize the data streams

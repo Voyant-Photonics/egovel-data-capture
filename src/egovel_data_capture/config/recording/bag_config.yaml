@@ -3,18 +3,23 @@ recording:
   base_path: "data/bags"
 
   profiles:
+    # All streams
     full_capture:
       topics:
+        # LiDAR topics
         - topic: "/voyant/device_metadata"
           bag_name: "lidar"
         - topic: "/voyant/point_cloud"
           bag_name: "lidar"
+        # Metadata topics
         - topic: "/tf_static"
           bag_name: "metadata"
+        # RGB camera
         - topic: "/camera/rgb/image_raw/compressed"
           bag_name: "rgb_camera"
         - topic: "/camera/rgb/camera_info"
           bag_name: "rgb_camera"
+        # Stereo cameras
         - topic: "/camera/left/image_raw/compressed"
           bag_name: "stereo_cameras"
         - topic: "/camera/right/image_raw/compressed"
@@ -23,6 +28,7 @@ recording:
           bag_name: "stereo_cameras"
         - topic: "/camera/right/camera_info"
           bag_name: "stereo_cameras"
+        # Navigation topics
         - topic: "/imu/data"
           bag_name: "navigation"
         - topic: "/gps/fix"

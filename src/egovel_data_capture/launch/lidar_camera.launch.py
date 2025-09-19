@@ -1,28 +1,18 @@
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
-from launch.substitutions import PathJoinSubstitution
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
-    # Configuration files
-    voyant_config = PathJoinSubstitution(
-        [
-            FindPackageShare("egovel_data_capture"),
-            "config",
-            "sensors",
-            "voyant_lidar.yaml",
-        ]
+    # Declare launch argument for camera selection and pass it through
+    camera_type_arg = DeclareLaunchArgument(
+        "camera_type",
+        default_value="oakd",
+        description="Camera type to use: oakd, realsense",
     )
-    camera_config = PathJoinSubstitution(
-        [
-            FindPackageShare("egovel_data_capture"),
-            "config",
-            "sensors",
-            "depthai_camera.yaml",
-        ]
-    )
+    camera_type = LaunchConfiguration("camera_type")
 
     # Include static transforms
     static_transforms = IncludeLaunchDescription(
@@ -35,7 +25,18 @@ def generate_launch_description():
         )
     )
 
-    # Sensor nodes
+    # ===============================
+    # Define the sensor nodes
+    # ===============================
+    # Voyant sensor node
+    voyant_config = PathJoinSubstitution(
+        [
+            FindPackageShare("egovel_data_capture"),
+            "config",
+            "sensors",
+            "voyant_lidar.yaml",
+        ]
+    )
     voyant_sensor = Node(
         package="voyant_ros",
         executable="voyant_sensor_node",
@@ -48,15 +49,23 @@ def generate_launch_description():
         output="screen",
     )
 
-    camera_node = Node(
-        package="depthai_ros_driver",
-        executable="camera_node",
-        name="camera",
-        parameters=[camera_config],
-        remappings=[
-            ("/camera/imu/data", "/imu/data")
-        ],  # TODO: Remove when we add VN-200 node
-        output="screen",
+    # Launch camera, forwarding the camera_type arg
+    camera_launch = IncludeLaunchDescription(
+        PathJoinSubstitution(
+            [
+                FindPackageShare("egovel_data_capture"),
+                "launch",
+                "camera.launch.py",
+            ]
+        ),
+        launch_arguments={"camera_type": camera_type}.items(),
     )
 
-    return LaunchDescription([static_transforms, voyant_sensor, camera_node])
+    return LaunchDescription(
+        [
+            camera_type_arg,
+            static_transforms,
+            voyant_sensor,
+            camera_launch,
+        ]
+    )
