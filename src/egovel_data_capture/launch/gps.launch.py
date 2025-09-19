@@ -42,18 +42,18 @@ def generate_launch_description():
             ComposableNode(
                 package="ublox_gps",
                 plugin="ublox_node::UbloxNode",
-                name="ublox_gps_node",
+                name="gps",
                 parameters=[params],
-                # Remap all ublox topics to /ublox_gps_node/ namespace
+                # Remap all ublox topics to /gps/ namespace
                 remappings=[
-                    ("navstatus", "/ublox_gps_node/navstatus"),
-                    ("navrelposned", "/ublox_gps_node/navrelposned"),
-                    ("fix", "/ublox_gps_node/fix"),
-                    ("fix_velocity", "/ublox_gps_node/fix_velocity"),
-                    ("navcov", "/ublox_gps_node/navcov"),
-                    ("navpvt", "/ublox_gps_node/navpvt"),
-                    ("nmea", "/ublox_gps_node/nmea"),
-                    ("rtcm", "/ublox_gps_node/rtcm"),
+                    ("navstatus", "/gps/navstatus"),
+                    ("navrelposned", "/gps/navrelposned"),
+                    ("fix", "/gps/fix"),
+                    ("fix_velocity", "/gps/fix_velocity"),
+                    ("navcov", "/gps/navcov"),
+                    ("navpvt", "/gps/navpvt"),
+                    ("nmea", "/gps/nmea"),
+                    ("rtcm", "/gps/rtcm"),
                 ],
             ),
         ],
@@ -79,9 +79,9 @@ def generate_launch_description():
     ntrip_with_remaps = GroupAction(
         [
             # NTRIP client subscribes to fix & nmea and publishes rtcm
-            SetRemap(src="fix", dst="/ublox_gps_node/fix"),
-            SetRemap(src="nmea", dst="/ublox_gps_node/nmea"),
-            SetRemap(src="rtcm", dst="/ublox_gps_node/rtcm"),
+            SetRemap(src="fix", dst="/gps/fix"),
+            SetRemap(src="nmea", dst="/gps/nmea"),
+            SetRemap(src="rtcm", dst="/gps/rtcm"),
             ntrip_launch,
         ]
     )
