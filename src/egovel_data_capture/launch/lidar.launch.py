@@ -16,17 +16,6 @@ def generate_launch_description():
         ]
     )
 
-    # Include static transforms
-    static_transforms = IncludeLaunchDescription(
-        PathJoinSubstitution(
-            [
-                FindPackageShare("egovel_data_capture"),
-                "launch",
-                "static_transforms.launch.py",
-            ]
-        )
-    )
-
     # Sensor nodes
     voyant_sensor = Node(
         package="voyant_ros",
@@ -40,4 +29,4 @@ def generate_launch_description():
         output="screen",
     )
 
-    return LaunchDescription([static_transforms, voyant_sensor])
+    return LaunchDescription([voyant_sensor])
