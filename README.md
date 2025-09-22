@@ -112,7 +112,11 @@ sudo apt install -y libasio-dev
 
 ### Docker setup
 
-Build:
+> ⚠️ Instructions hidden as the dockerfile is not fully up to date.
+>
+> If you require the docker set up, please reach out!
+
+<!-- Build:
 
 ```bash
 docker build -t voyant-egovel-container .
@@ -141,7 +145,7 @@ Exec in (access running container):
 
 ```bash
 docker exec -it voyant_egovel_container bash
-```
+``` -->
 
 ## Build and run [WIP]
 
