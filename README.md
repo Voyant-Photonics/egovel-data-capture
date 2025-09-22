@@ -163,14 +163,21 @@ By default, this uses the `oakd` camera. You can switch to `realsense` with:
 ros2 launch egovel_data_capture lidar_camera.launch.py camera_type:=realsense
 ```
 
-Start the GPS Node. The RTK corrections are provided through a NTRIP connection with [`NYSNET`](https://cors.dot.ny.gov/sbc/Account/Index?returnUrl=%2Fsbc) VRS on `/rtcm` topic.
-
-```bash
-source install/setup.bash
-ros2 launch egovel_data_capture gps.launch.py
-```
-
-The GPS sensor and NTRIP client can be configured in [`gps.yaml`](./src/egovel_data_capture/config/sensors/gps.yaml).
+> **GPS parameters note**
+>
+> The merged config makes a few assumptions and you may need to tweak some parameters:
+>
+> 1. The RTK corrections are provided through an NTRIP connection with [`NYSNET`](https://cors.dot.ny.gov/sbc/Account/Index?returnUrl=%2Fsbc) VRS.
+>    - You will need to change this based on your location.
+> 2. The GPS receiver is on port `/dev/ttyACM0`
+>    - This may change depending on GPS / camera ordering, and you will see the following error:
+>
+>       ```bash
+>       [component_container-1] [ERROR] [1758553924.273596175] [ublox_gps_container]: Component constructor threw an exception: Could not configure serial baud rate
+>       [ERROR] [launch_ros.actions.load_composable_nodes]: Failed to load node 'ublox_gps_node' of type 'ublox_node::UbloxNode' in container '/ublox_gps_container': Component constructor threw an exception: Could not configure serial baud rate
+>       ```
+>
+> The GPS sensor and NTRIP client can be configured in [**`config/gps.yaml`**](./src/egovel_data_capture/config/sensors/gps.yaml).
 
 **Terminal 2:** Visualize the data streams
 
