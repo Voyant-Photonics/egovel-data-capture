@@ -48,22 +48,47 @@ static_transforms:
   # Sensor mounts on rig
   sensors:
     voyant_sensor:
+      # To optical center
+      # MDL pointed down @ -4.5deg
+      # MDL optical center from front-bottom-left corner (in MDL POV):
+      # 20 mm back, 43.75 mm right, 20.5 mm up
+      # Optical center from plate:
+      # - 10mm in front of plate edge = half_plate_depth(0.1524m) + 0.0100m = 0.1624m
+      # - 185mm above plate = 0.1850m
+      # - 155mm + 44mm = 199mm from plate left = half_plate_width(0.2286m) - 0.1990m = +0.0296m from center
       parent: "rig_baseplate"
       child: "voyant_sensor"
-      translation: [0.1, 0.0, 0.2]
-      rotation: [0, 0, 0, 1]
+      translation: [0.1624, 0.0296, 0.1850] # [plate_center + front_offset, right_of_center, above_plate]
+      rotation: [0.0000, 0.0393, 0.0000, 0.9992] # -4.5° pitch down (down in z)
     imu:
-      parent: "rig_baseplate"
+      # 64 mm above lidar optical center
+      parent: "voyant_sensor"
       child: "imu"
-      translation: [0.0, 0.1, 0.1]
+      translation: [0.0, 0.0, 0.064]
       rotation: [0, 0, 0, 1]
     gps_antenna:
+      # 35mm forward from back of plate = -half_plate_depth(0.1524m) + 0.0350m = -0.1174m
+      # 50mm left of right plate edge = -half_plate_width(0.2286m) + 0.0500m = -0.1786m
+      # 15mm above top of plate
       parent: "rig_baseplate"
       child: "gps_antenna"
-      translation: [0.0, 0.0, 0.3]
+      translation: [-0.1174, -0.1786, 0.015] # [back + forward_offset, right + left_offset, above_plate]
       rotation: [0, 0, 0, 1]
     camera_link:
+      # depthai camera_link is RGB optical center
+      # 65mm above top of plate = 0.0650m
+      # 42mm in front of plate edge = half_plate_depth(0.1524m) + 0.0420m = 0.1944m
+      # 50mm from left edge = half_plate_width(0.2286m) - 0.0500m = +0.1786m from center
+      # 10deg angle to right (towards center) = negative yaw
       parent: "rig_baseplate"
       child: "camera_link"
-      translation: [0.15, 0.0, 0.05]
+      translation: [0.1944, 0.1786, 0.0650] # [plate_center + front_offset, left_of_center, above_plate]
+      rotation: [0.0000, 0.0000, -0.0872, 0.9962] # -10° yaw (turning right)
+    imu_gps_antenna:
+      # 30mm forward from back of plate = -half_plate_depth(0.1524m) + 0.0300m = -0.1224m
+      # 30mm right of left plate edge = half_plate_width(0.2286m) - 0.0300m = 0.1986m
+      # 8mm above top of plate = 0.0080m
+      parent: "rig_baseplate"
+      child: "imu_gps_antenna"
+      translation: [-0.1224, 0.1986, 0.0080] # [back + forward_offset, left - right_offset, above_plate]
       rotation: [0, 0, 0, 1]
