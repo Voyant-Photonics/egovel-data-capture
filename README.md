@@ -154,7 +154,7 @@ colcon build # Optionally, use --parallel-workers $(nproc) to speed up build
 
 ```bash
 source install/setup.bash
-ros2 launch egovel_data_capture lidar_camera.launch.py
+ros2 launch egovel_data_capture all_sensors.launch.py
 ```
 
 By default, this uses the `oakd` camera. You can switch to `realsense` with:
