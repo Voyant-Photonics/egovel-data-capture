@@ -216,7 +216,7 @@ Create a file called `merge_config.yaml` with contents like:
 
 ```bash
 output_bags:
-  - uri: data/bags/merged_full_capture_20250912_160110
+  - uri: data/bags/merged_full_capture_foo
     storage_id: mcap
     all: true
 ```
@@ -232,6 +232,19 @@ ros2 bag convert \
     --input data/bags/full_capture_20250912_160110/stereo_cameras_20250912_160110 \
     --output merge_config.yaml
 ```
+
+> You can make this easier with:
+>
+> ```bash
+> TIMESTAMP=20250912_160110
+> ros2 bag convert \
+>     --input data/bags/full_capture_${TIMESTAMP}/lidar_${TIMESTAMP} \
+>     --input data/bags/full_capture_${TIMESTAMP}/metadata_${TIMESTAMP} \
+>     --input data/bags/full_capture_${TIMESTAMP}/navigation_${TIMESTAMP} \
+>     --input data/bags/full_capture_${TIMESTAMP}/rgb_camera_${TIMESTAMP} \
+>     --input data/bags/full_capture_${TIMESTAMP}/stereo_cameras_${TIMESTAMP} \
+>     --output merge_config.yaml
+> ```
 
 Playback the merged bag file with `ros2 bag play`:
 
