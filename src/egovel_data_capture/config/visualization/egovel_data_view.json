@@ -243,24 +243,24 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/imu/data.angular_velocity.y",
+          "value": "/vectornav/imu.angular_velocity.x",
           "enabled": true,
           "color": "#f5774d",
+          "label": "Roll Rate"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/vectornav/imu.angular_velocity.y",
+          "enabled": true,
+          "color": "#f7df71",
           "label": "Pitch Rate"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/imu/data.angular_velocity.z",
-          "enabled": true,
-          "color": "#f7df71",
-          "label": "Yaw Rate"
-        },
-        {
-          "timestampMethod": "receiveTime",
-          "value": "/imu/data.angular_velocity.x",
+          "value": "/vectornav/imu.angular_velocity.z",
           "enabled": true,
           "color": "#4e98e2",
-          "label": "Roll Rate"
+          "label": "Yaw Rate"
         }
       ],
       "showXAxisLabels": true,
@@ -276,21 +276,21 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/imu/data.linear_acceleration.x",
+          "value": "/vectornav/imu.linear_acceleration.x",
           "enabled": true,
           "color": "#4e98e2",
           "label": "Lin Accel X"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/imu/data.linear_acceleration.y",
+          "value": "/vectornav/imu.linear_acceleration.y",
           "enabled": true,
           "color": "#f5774d",
           "label": "Lin Accel Y"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/imu/data.linear_acceleration.z",
+          "value": "/vectornav/imu.linear_acceleration.z",
           "enabled": true,
           "color": "#f7df71",
           "label": "Lin Accel Z"
