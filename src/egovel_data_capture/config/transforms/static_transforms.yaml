@@ -1,36 +1,48 @@
+# NOTE: These static transforms represent the setup for the indoor + outdoor stationary
+# dataset recordings on 2025-09-22. These will not be valid for datasets collected via car mount.
 static_transforms:
   # Vehicle base coordinate system
   vehicle_cog:
     frame_id: "vehicle_cog"
 
   # Wheel transforms (for wheelbase/track encoding)
+  # Wheel track: 19.375" == 0.4921m
+  # Wheel baseline: 28" == 0.7112m
+  # Wheel radius: 4" == 0.1016m
+  # Cart height: 35" == 0.889m
+  # Cart length: 37" == 0.9398m
+  # Cart width: 25.5" == 0.6477m
   wheels:
     front_left:
       parent: "vehicle_cog"
       child: "wheel_fl"
-      translation: [1.2, 0.8, -0.3] # [x_wheelbase/2, y_track/2, z_ground_clearance]
+      translation: [0.3556, 0.2461, -0.3429] # [wheelbase/2, track/2, wheel_center - cart_center]
       rotation: [0, 0, 0, 1] # quaternion [x,y,z,w]
     front_right:
       parent: "vehicle_cog"
       child: "wheel_fr"
-      translation: [1.2, -0.8, -0.3]
+      translation: [0.3556, -0.2461, -0.3429]
       rotation: [0, 0, 0, 1]
     rear_left:
       parent: "vehicle_cog"
       child: "wheel_rl"
-      translation: [-1.2, 0.8, -0.3]
+      translation: [-0.3556, 0.2461, -0.3429]
       rotation: [0, 0, 0, 1]
     rear_right:
       parent: "vehicle_cog"
       child: "wheel_rr"
-      translation: [-1.2, -0.8, -0.3]
+      translation: [-0.3556, -0.2461, -0.3429]
       rotation: [0, 0, 0, 1]
 
-  # Collection rig mounting
+  # Collection rig mounting (top of plate)
+  # 1/2" thick = 0.0127m, 12" deep = 0.3048m, 18" wide = 0.4572m
   collection_rig:
     parent: "vehicle_cog"
     child: "rig_baseplate"
-    translation: [0.0, 0.0, 1.5] # Mount point on vehicle
+    # X: cart_front(0.4699m) - rig_center_from_front(0.1524m) = 0.3175m
+    # Y: centered = 0.0m
+    # Z: cart_top(0.4445m) + plate_thickness(0.0127m) = 0.4572m
+    translation: [0.3175, 0.0, 0.4572] # [front_offset, centered_width, top_of_cart + plate_thickness]
     rotation: [0, 0, 0, 1]
 
   # Sensor mounts on rig
