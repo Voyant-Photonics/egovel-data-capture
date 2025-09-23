@@ -112,7 +112,11 @@ sudo apt install -y libasio-dev
 
 ### Docker setup
 
-Build:
+> ⚠️ Instructions hidden as the dockerfile is not fully up to date.
+>
+> If you require the docker set up, please reach out!
+
+<!-- Build:
 
 ```bash
 docker build -t voyant-egovel-container .
@@ -141,7 +145,7 @@ Exec in (access running container):
 
 ```bash
 docker exec -it voyant_egovel_container bash
-```
+``` -->
 
 ## Build and run [WIP]
 
@@ -154,7 +158,7 @@ colcon build # Optionally, use --parallel-workers $(nproc) to speed up build
 
 ```bash
 source install/setup.bash
-ros2 launch egovel_data_capture lidar_camera.launch.py
+ros2 launch egovel_data_capture all_sensors.launch.py
 ```
 
 By default, this uses the `oakd` camera. You can switch to `realsense` with:
@@ -163,14 +167,21 @@ By default, this uses the `oakd` camera. You can switch to `realsense` with:
 ros2 launch egovel_data_capture lidar_camera.launch.py camera_type:=realsense
 ```
 
-Start the GPS Node. The RTK corrections are provided through a NTRIP connection with [`NYSNET`](https://cors.dot.ny.gov/sbc/Account/Index?returnUrl=%2Fsbc) VRS on `/rtcm` topic.
-
-```bash
-source install/setup.bash
-ros2 launch egovel_data_capture gps.launch.py
-```
-
-The GPS sensor and NTRIP client can be configured in [`gps.yaml`](./src/egovel_data_capture/config/sensors/gps.yaml).
+> **GPS parameters note**
+>
+> The merged config makes a few assumptions and you may need to tweak some parameters:
+>
+> 1. The RTK corrections are provided through an NTRIP connection with [`NYSNET`](https://cors.dot.ny.gov/sbc/Account/Index?returnUrl=%2Fsbc) VRS.
+>    - You will need to change this based on your location.
+> 2. The GPS receiver is on port `/dev/ttyACM0`
+>    - This may change depending on GPS / camera ordering, and you will see the following error:
+>
+>       ```bash
+>       [component_container-1] [ERROR] [1758553924.273596175] [ublox_gps_container]: Component constructor threw an exception: Could not configure serial baud rate
+>       [ERROR] [launch_ros.actions.load_composable_nodes]: Failed to load node 'ublox_gps_node' of type 'ublox_node::UbloxNode' in container '/ublox_gps_container': Component constructor threw an exception: Could not configure serial baud rate
+>       ```
+>
+> The GPS sensor and NTRIP client can be configured in [**`config/gps.yaml`**](./src/egovel_data_capture/config/sensors/gps.yaml).
 
 **Terminal 2:** Visualize the data streams
 
@@ -209,7 +220,7 @@ Create a file called `merge_config.yaml` with contents like:
 
 ```bash
 output_bags:
-  - uri: data/bags/merged_full_capture_20250912_160110
+  - uri: data/bags/merged_full_capture_foo
     storage_id: mcap
     all: true
 ```
@@ -225,6 +236,19 @@ ros2 bag convert \
     --input data/bags/full_capture_20250912_160110/stereo_cameras_20250912_160110 \
     --output merge_config.yaml
 ```
+
+> You can make this easier with:
+>
+> ```bash
+> TIMESTAMP=20250912_160110
+> ros2 bag convert \
+>     --input data/bags/full_capture_${TIMESTAMP}/lidar_${TIMESTAMP} \
+>     --input data/bags/full_capture_${TIMESTAMP}/metadata_${TIMESTAMP} \
+>     --input data/bags/full_capture_${TIMESTAMP}/navigation_${TIMESTAMP} \
+>     --input data/bags/full_capture_${TIMESTAMP}/rgb_camera_${TIMESTAMP} \
+>     --input data/bags/full_capture_${TIMESTAMP}/stereo_cameras_${TIMESTAMP} \
+>     --output merge_config.yaml
+> ```
 
 Playback the merged bag file with `ros2 bag play`:
 
