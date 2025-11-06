@@ -68,7 +68,7 @@ static_transforms:
       rotation: [0, 0, 0, 1]
     gps:
       parent: "rig_baseplate"
-      child: "gps"
+      child: "ublox_mount"
       translation: [-0.064611, -0.19582, 0.024218]
       rotation: [0, 0, 0, 1]
     gps_antenna:
@@ -76,7 +76,7 @@ static_transforms:
       # 50mm left of right plate edge = -half_plate_width(0.2286m) + 0.0500m = -0.1786m
       # 15mm above top of plate
       parent: "rig_baseplate"
-      child: "gps_antenna"
+      child: "gps"
       translation: [-0.1174, -0.1786, 0.015] # [back + forward_offset, right + left_offset, above_plate]
       rotation: [0, 0, 0, 1]
     camera_link:
