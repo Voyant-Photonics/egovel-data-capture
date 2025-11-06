@@ -58,7 +58,7 @@ static_transforms:
       # - 155mm + 44mm = 199mm from plate left = half_plate_width(0.2286m) - 0.1990m = +0.0296m from center
       parent: "rig_baseplate"
       child: "voyant_sensor"
-      translation: [ -0.08271,0.04075,0.10028] # [plate_center + front_offset, right_of_center, above_plate]
+      translation: [-0.08271, 0.04075, 0.10028] # [plate_center + front_offset, right_of_center, above_plate]
       rotation: [0.0000, 0.000, 0.0000, 1.0] # -4.5° pitch down (down in z)
     imu:
       # 64 mm above lidar optical center
