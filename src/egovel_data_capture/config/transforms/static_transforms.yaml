@@ -2,8 +2,8 @@
 # dataset recordings on 2025-09-22. These will not be valid for datasets collected via car mount.
 static_transforms:
   # Vehicle base coordinate system
-  vehicle_cog:
-    frame_id: "vehicle_cog"
+  front_axle:
+    frame_id: "front_axle"
 
   # Wheel transforms (for wheelbase/track encoding)
   # Wheel track: 19.375" == 0.4921m
@@ -14,22 +14,22 @@ static_transforms:
   # Cart width: 25.5" == 0.6477m
   wheels:
     front_left:
-      parent: "vehicle_cog"
+      parent: "front_axle"
       child: "wheel_fl"
       translation: [0.0, -0.99, 0.0] # [wheelbase/2, track/2, wheel_center - cart_center]
       rotation: [0, 0, 0, 1] # quaternion [x,y,z,w]
     front_right:
-      parent: "vehicle_cog"
+      parent: "front_axle"
       child: "wheel_fr"
       translation: [0.0, 0.99, 0.0]
       rotation: [0, 0, 0, 1]
     rear_left:
-      parent: "vehicle_cog"
+      parent: "front_axle"
       child: "wheel_rl"
       translation: [-2.9, -0.99, 0.0]
       rotation: [0, 0, 0, 1]
     rear_right:
-      parent: "vehicle_cog"
+      parent: "front_axle"
       child: "wheel_rr"
       translation: [-2.9, 0.99, 0.0]
       rotation: [0, 0, 0, 1]
@@ -37,7 +37,7 @@ static_transforms:
   # Collection rig mounting (top of plate)
   # 1/2" thick = 0.0127m, 12" deep = 0.3048m, 18" wide = 0.4572m
   collection_rig:
-    parent: "vehicle_cog"
+    parent: "front_axle"
     child: "rig_baseplate"
     # X: cart_front(0.4699m) - rig_center_from_front(0.1524m) = 0.3175m
     # Y: centered = 0.0m

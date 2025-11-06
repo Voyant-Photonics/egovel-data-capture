@@ -22,13 +22,13 @@ def generate_launch_description():
     transforms = config["static_transforms"]
     nodes = []
 
-    # Add map -> vehicle_cog transform as Identity
+    # Add map -> front_axle transform as Identity
     nodes.append(
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
             name="map_to_vehicle_publisher",
-            arguments=["0", "0", "0", "0", "0", "0", "map", "vehicle_cog"],
+            arguments=["0", "0", "0", "0", "0", "0", "map", "front_axle"],
             output="screen",
         )
     )
