@@ -2,8 +2,8 @@
 # dataset recordings on 2025-09-22. These will not be valid for datasets collected via car mount.
 static_transforms:
   # Vehicle base coordinate system
-  vehicle_cog:
-    frame_id: "vehicle_cog"
+  front_axle:
+    frame_id: "front_axle"
 
   # Wheel transforms (for wheelbase/track encoding)
   # Wheel track: 19.375" == 0.4921m
@@ -14,35 +14,35 @@ static_transforms:
   # Cart width: 25.5" == 0.6477m
   wheels:
     front_left:
-      parent: "vehicle_cog"
+      parent: "front_axle"
       child: "wheel_fl"
-      translation: [0.3556, 0.2461, -0.3429] # [wheelbase/2, track/2, wheel_center - cart_center]
+      translation: [0.0, -0.99, 0.0] # [wheelbase/2, track/2, wheel_center - cart_center]
       rotation: [0, 0, 0, 1] # quaternion [x,y,z,w]
     front_right:
-      parent: "vehicle_cog"
+      parent: "front_axle"
       child: "wheel_fr"
-      translation: [0.3556, -0.2461, -0.3429]
+      translation: [0.0, 0.99, 0.0]
       rotation: [0, 0, 0, 1]
     rear_left:
-      parent: "vehicle_cog"
+      parent: "front_axle"
       child: "wheel_rl"
-      translation: [-0.3556, 0.2461, -0.3429]
+      translation: [-2.9, -0.99, 0.0]
       rotation: [0, 0, 0, 1]
     rear_right:
-      parent: "vehicle_cog"
+      parent: "front_axle"
       child: "wheel_rr"
-      translation: [-0.3556, -0.2461, -0.3429]
+      translation: [-2.9, 0.99, 0.0]
       rotation: [0, 0, 0, 1]
 
   # Collection rig mounting (top of plate)
   # 1/2" thick = 0.0127m, 12" deep = 0.3048m, 18" wide = 0.4572m
   collection_rig:
-    parent: "vehicle_cog"
+    parent: "front_axle"
     child: "rig_baseplate"
     # X: cart_front(0.4699m) - rig_center_from_front(0.1524m) = 0.3175m
     # Y: centered = 0.0m
     # Z: cart_top(0.4445m) + plate_thickness(0.0127m) = 0.4572m
-    translation: [0.3175, 0.0, 0.4572] # [front_offset, centered_width, top_of_cart + plate_thickness]
+    translation: [0.3175, 0.0, 1.8] # [front_offset, centered_width, top_of_cart + plate_thickness]
     rotation: [0, 0, 0, 1]
 
   # Sensor mounts on rig
@@ -58,20 +58,25 @@ static_transforms:
       # - 155mm + 44mm = 199mm from plate left = half_plate_width(0.2286m) - 0.1990m = +0.0296m from center
       parent: "rig_baseplate"
       child: "voyant_sensor"
-      translation: [0.1624, 0.0296, 0.1850] # [plate_center + front_offset, right_of_center, above_plate]
-      rotation: [0.0000, 0.0393, 0.0000, 0.9992] # -4.5° pitch down (down in z)
+      translation: [-0.08271, 0.04075, 0.10028] # [plate_center + front_offset, right_of_center, above_plate]
+      rotation: [0.0000, 0.000, 0.0000, 1.0] # -4.5° pitch down (down in z)
     imu:
       # 64 mm above lidar optical center
-      parent: "voyant_sensor"
+      parent: "rig_baseplate"
       child: "imu"
-      translation: [0.0, 0.0, 0.064]
+      translation: [-0.058532, -0.13916, 0.027885]
+      rotation: [0, 0, 0, 1]
+    gps:
+      parent: "rig_baseplate"
+      child: "ublox_mount"
+      translation: [-0.064611, -0.19582, 0.024218]
       rotation: [0, 0, 0, 1]
     gps_antenna:
       # 35mm forward from back of plate = -half_plate_depth(0.1524m) + 0.0350m = -0.1174m
       # 50mm left of right plate edge = -half_plate_width(0.2286m) + 0.0500m = -0.1786m
       # 15mm above top of plate
       parent: "rig_baseplate"
-      child: "gps_antenna"
+      child: "gps"
       translation: [-0.1174, -0.1786, 0.015] # [back + forward_offset, right + left_offset, above_plate]
       rotation: [0, 0, 0, 1]
     camera_link:
@@ -82,8 +87,8 @@ static_transforms:
       # 10deg angle to right (towards center) = negative yaw
       parent: "rig_baseplate"
       child: "camera_link"
-      translation: [0.1944, 0.1786, 0.0650] # [plate_center + front_offset, left_of_center, above_plate]
-      rotation: [0.0000, 0.0000, -0.0872, 0.9962] # -10° yaw (turning right)
+      translation: [0.002988, 0.191, 0.049799] # [plate_center + front_offset, left_of_center, above_plate]
+      rotation: [0.0000, 0.0000, 0.0000, 1.0] # -10° yaw (turning right)
     imu_gps_antenna:
       # 30mm forward from back of plate = -half_plate_depth(0.1524m) + 0.0300m = -0.1224m
       # 30mm right of left plate edge = half_plate_width(0.2286m) - 0.0300m = 0.1986m
