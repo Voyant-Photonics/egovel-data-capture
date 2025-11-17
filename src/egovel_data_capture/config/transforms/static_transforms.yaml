@@ -12,26 +12,30 @@ static_transforms:
   # Cart height: 35" == 0.889m
   # Cart length: 37" == 0.9398m
   # Cart width: 25.5" == 0.6477m
+
+  # BL: 120" -> 3.048 (1.524 is 1/2)
+  # TR: 70" -> 1.778" (0.889 is 1/2)
+  # WR: 15" wheel rad
   wheels:
     front_left:
       parent: "front_axle"
       child: "wheel_fl"
-      translation: [0.0, -0.99, 0.0] # [wheelbase/2, track/2, wheel_center - cart_center]
+      translation: [0.0, 0.889, 0.0] # [wheelbase/2, track/2, wheel_center - cart_center]
       rotation: [0, 0, 0, 1] # quaternion [x,y,z,w]
     front_right:
       parent: "front_axle"
       child: "wheel_fr"
-      translation: [0.0, 0.99, 0.0]
+      translation: [0.0, -0.889, 0.0]
       rotation: [0, 0, 0, 1]
     rear_left:
       parent: "front_axle"
       child: "wheel_rl"
-      translation: [-2.9, -0.99, 0.0]
+      translation: [-3.048, 0.889, 0.0]
       rotation: [0, 0, 0, 1]
     rear_right:
       parent: "front_axle"
       child: "wheel_rr"
-      translation: [-2.9, 0.99, 0.0]
+      translation: [-3.048, -0.889, 0.0]
       rotation: [0, 0, 0, 1]
 
   # Collection rig mounting (top of plate)
@@ -42,8 +46,8 @@ static_transforms:
     # X: cart_front(0.4699m) - rig_center_from_front(0.1524m) = 0.3175m
     # Y: centered = 0.0m
     # Z: cart_top(0.4445m) + plate_thickness(0.0127m) = 0.4572m
-    translation: [0.3175, 0.0, 1.8] # [front_offset, centered_width, top_of_cart + plate_thickness]
-    rotation: [0, 0, 0, 1]
+    translation: [-1.2954, -0.0508, 1.3716] # [front_offset, centered_width, top_of_cart + plate_thickness]
+    rotation: [0.00436,0.041003,-0.000179,0.999149]
 
   # Sensor mounts on rig
   sensors:
@@ -75,9 +79,9 @@ static_transforms:
       # 35mm forward from back of plate = -half_plate_depth(0.1524m) + 0.0350m = -0.1174m
       # 50mm left of right plate edge = -half_plate_width(0.2286m) + 0.0500m = -0.1786m
       # 15mm above top of plate
-      parent: "rig_baseplate"
+      parent: "front_axle"
       child: "gps"
-      translation: [-0.1174, -0.1786, 0.015] # [back + forward_offset, right + left_offset, above_plate]
+      translation: [-3.0226, 0.4826, 1.3716] # [back + forward_offset, right + left_offset, above_plate]
       rotation: [0, 0, 0, 1]
     camera_link:
       # depthai camera_link is RGB optical center
@@ -93,7 +97,7 @@ static_transforms:
       # 30mm forward from back of plate = -half_plate_depth(0.1524m) + 0.0300m = -0.1224m
       # 30mm right of left plate edge = half_plate_width(0.2286m) - 0.0300m = 0.1986m
       # 8mm above top of plate = 0.0080m
-      parent: "rig_baseplate"
+      parent: "front_axle"
       child: "imu_gps_antenna"
-      translation: [-0.1224, 0.1986, 0.0080] # [back + forward_offset, left - right_offset, above_plate]
+      translation: [-3.0226, -0.4826, 1.3716] # [back + forward_offset, left - right_offset, above_plate]
       rotation: [0, 0, 0, 1]
