@@ -26,6 +26,7 @@ def generate_launch_description():
     # Calculate max bag size in bytes
     max_bag_size_mb = config["recording"]["max_bag_size_mb"]
     max_bag_size_bytes = max_bag_size_mb * 1024 * 1024
+    bag_cache_size = 200 * 1024 * 1024
 
     # Get base path from config
     base_path = config["recording"]["base_path"]
@@ -52,8 +53,12 @@ def generate_launch_description():
                     f"{base_path}/{profile_name}_{timestamp}/{bag_name}_{timestamp}",
                     "--storage",
                     "mcap",
-                    "--max-bag-size",
-                    str(max_bag_size_bytes),
+                    # "--max-bag-size",
+                    # str(max_bag_size_bytes),
+                    "--max-bag-duration",
+                    "60",
+                    "--max-cache-size",
+                    str(bag_cache_size),
                 ],
                 output="screen",
             )
