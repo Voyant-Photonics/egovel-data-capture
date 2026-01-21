@@ -14,7 +14,7 @@ def generate_launch_description():
     # Declare launch argument for camera selection
     camera_type_arg = DeclareLaunchArgument(
         "camera_type",
-        default_value="oakd",
+        default_value="realsense",
         description="Camera type to use: oakd, realsense",
     )
 
@@ -37,6 +37,15 @@ def generate_launch_description():
             "config",
             "sensors",
             "realsense_camera.yaml",
+        ]
+    )
+
+    hesai_config = PathJoinSubstitution(
+        [
+            FindPackageShare("egovel_data_capture"),
+            "config",
+            "sensors",
+            "hesai.yaml",
         ]
     )
 
@@ -76,10 +85,25 @@ def generate_launch_description():
         ],
     )
 
+    # Hesai LiDAR node
+    hesai_node = Node(
+        namespace="hesai_ros_driver",
+        package="hesai_ros_driver",
+        executable="hesai_ros_driver_node",
+        name="hesai_driver",
+        parameters=[{"config_path": hesai_config}],
+        output="screen",
+        remappings=[
+            ("/lidar_points", "/hesai/lidar_points"),
+            ("/lidar_imu", "/hesai/lidar_imu"),
+        ],
+    )
+
     return LaunchDescription(
         [
             camera_type_arg,
             oakd_camera_node,
             realsense_camera_node,
+            hesai_node,
         ]
     )

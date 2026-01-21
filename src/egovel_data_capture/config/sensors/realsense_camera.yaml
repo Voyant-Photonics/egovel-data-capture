@@ -6,17 +6,17 @@
 
       # Enable/disable streams
       enable_color: true
-      enable_depth: false
+      enable_depth: true
       enable_infra1: true # Left IR camera
       enable_infra2: true # Right IR camera
       enable_accel: false
       enable_gyro: false
 
-      # Turn off IR emitter/projector
-      depth_module.emitter_enabled: false
+      # Turn on/off IR emitter/projector
+      depth_module.emitter_enabled: true
 
       # Depth processing
-      align_depth.enable: false
+      align_depth.enable: false # For some reason this is not working
 
       # Exposure settings
       depth_module.enable_auto_exposure: true

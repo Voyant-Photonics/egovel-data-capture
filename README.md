@@ -209,6 +209,19 @@ To select a different profile, specify the `RECORDING_PROFILE` environment varia
 RECORDING_PROFILE=lidar_only ros2 launch egovel_data_capture recording.launch.py
 ```
 
+### Demo commands
+
+```bash
+ros2 launch src/egovel-data-capture/src/egovel_data_capture/launch/demo_comparison_sensors.launch.py 
+```
+
+```bash
+RECORDING_PROFILE=demo_rig ros2 launch egovel_data_capture recording.launch.py
+```
+
+And foxglove bridge or rviz from above
+
+
 ### Playback
 
 The recording system writes sensor data to separate bag files in parallel to optimize I/O performance.
