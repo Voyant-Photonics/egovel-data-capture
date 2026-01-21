@@ -70,3 +70,21 @@ recording:
           bag_name: "lidar"
         - topic: "/tf_static"
           bag_name: "metadata"
+
+   # All demo sensors combined
+    demo_rig:
+      topics:
+        # RGB camera
+        - topic: "/camera/rgb/image_raw/compressed"
+          bag_name: "rgb_camera"
+        - topic: "/camera/rgb/camera_info"
+          bag_name: "rgb_camera"
+        # Stereo cameras
+        - topic: "/camera/left/image_raw/compressed"
+          bag_name: "stereo_cameras"
+        - topic: "/camera/right/image_raw/compressed"
+          bag_name: "stereo_cameras"
+        - topic: "/camera/left/camera_info"
+          bag_name: "stereo_cameras"
+        - topic: "/camera/right/camera_info"
+          bag_name: "stereo_cameras"
