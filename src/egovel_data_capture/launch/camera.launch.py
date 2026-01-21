@@ -60,22 +60,19 @@ def generate_launch_description():
         condition=IfCondition(EqualsSubstitution(camera_type, "realsense")),
         remappings=[
             # RGB camera remapping (RealSense color -> standard RGB)
-            (
-                "/camera/camera/color/image_raw/compressed",
-                "/camera/rgb/image_raw/compressed",
-            ),
+            ("/camera/camera/color/image_raw", "/camera/rgb/image_raw"),
+            ("/camera/camera/color/image_raw/compressed", "/camera/rgb/image_raw/compressed"),
             ("/camera/camera/color/camera_info", "/camera/rgb/camera_info"),
             # Stereo cameras remapping (RealSense infrared -> standard left/right)
-            (
-                "/camera/camera/infra1/image_rect_raw/compressed",
-                "/camera/left/image_raw/compressed",
-            ),
-            (
-                "/camera/camera/infra2/image_rect_raw/compressed",
-                "/camera/right/image_raw/compressed",
-            ),
+            ("/camera/camera/infra1/image_rect_raw", "/camera/left/image_raw"),
+            ("/camera/camera/infra1/image_rect_raw/compressed", "/camera/left/image_raw/compressed"),
+            ("/camera/camera/infra2/image_rect_raw", "/camera/right/image_raw"),
+            ("/camera/camera/infra2/image_rect_raw/compressed", "/camera/right/image_raw/compressed"),
             ("/camera/camera/infra1/camera_info", "/camera/left/camera_info"),
             ("/camera/camera/infra2/camera_info", "/camera/right/camera_info"),
+            # Depth remapping (non-aligned, native 16-bit depth)
+            ("/camera/camera/depth/image_rect_raw", "/camera/depth/image_raw"),
+            ("/camera/camera/depth/camera_info", "/camera/depth/camera_info"),
         ],
     )
 
