@@ -88,3 +88,8 @@ recording:
           bag_name: "stereo_cameras"
         - topic: "/camera/right/camera_info"
           bag_name: "stereo_cameras"
+        # Hesai PandarXT LiDAR
+        - topic: "/hesai/lidar_points"
+          bag_name: "hesai_lidar"
+        - topic: "/hesai/lidar_imu"
+          bag_name: "hesai_lidar"
